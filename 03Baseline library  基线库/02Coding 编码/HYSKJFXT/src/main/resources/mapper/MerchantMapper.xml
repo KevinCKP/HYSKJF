@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scau.hyskjf.dao.MerchantMapper">
+  <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.Merchant">
+    <id column="merID" jdbcType="INTEGER" property="merid" />
+    <result column="merSubID" jdbcType="INTEGER" property="mersubid" />
+    <result column="merTopID" jdbcType="INTEGER" property="mertopid" />
+    <result column="merType" jdbcType="VARCHAR" property="mertype" />
+    <result column="merName" jdbcType="VARCHAR" property="mername" />
+    <result column="merCumPresent" jdbcType="REAL" property="mercumpresent" />
+    <result column="merDicPresent" jdbcType="REAL" property="merdicpresent" />
+    <result column="merAppStat" jdbcType="BIT" property="merappstat" />
+    <result column="merRecommend" jdbcType="BIT" property="merrecommend" />
+    <result column="isIndex" jdbcType="BIT" property="isindex" />
+    <result column="oweCredit" jdbcType="REAL" property="owecredit" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    merID, merSubID, merTopID, merType, merName, merCumPresent, merDicPresent, merAppStat, 
+    merRecommend, isIndex, oweCredit
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from Merchant
+    where merID = #{merid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from Merchant
+    where merID = #{merid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.scau.hyskjf.pojo.Merchant">
+    insert into Merchant (merID, merSubID, merTopID, 
+      merType, merName, merCumPresent, 
+      merDicPresent, merAppStat, merRecommend, 
+      isIndex, oweCredit)
+    values (#{merid,jdbcType=INTEGER}, #{mersubid,jdbcType=INTEGER}, #{mertopid,jdbcType=INTEGER}, 
+      #{mertype,jdbcType=VARCHAR}, #{mername,jdbcType=VARCHAR}, #{mercumpresent,jdbcType=REAL}, 
+      #{merdicpresent,jdbcType=REAL}, #{merappstat,jdbcType=BIT}, #{merrecommend,jdbcType=BIT}, 
+      #{isindex,jdbcType=BIT}, #{owecredit,jdbcType=REAL})
+  </insert>
+  <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.Merchant">
+    insert into Merchant
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="merid != null">
+        merID,
+      </if>
+      <if test="mersubid != null">
+        merSubID,
+      </if>
+      <if test="mertopid != null">
+        merTopID,
+      </if>
+      <if test="mertype != null">
+        merType,
+      </if>
+      <if test="mername != null">
+        merName,
+      </if>
+      <if test="mercumpresent != null">
+        merCumPresent,
+      </if>
+      <if test="merdicpresent != null">
+        merDicPresent,
+      </if>
+      <if test="merappstat != null">
+        merAppStat,
+      </if>
+      <if test="merrecommend != null">
+        merRecommend,
+      </if>
+      <if test="isindex != null">
+        isIndex,
+      </if>
+      <if test="owecredit != null">
+        oweCredit,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="merid != null">
+        #{merid,jdbcType=INTEGER},
+      </if>
+      <if test="mersubid != null">
+        #{mersubid,jdbcType=INTEGER},
+      </if>
+      <if test="mertopid != null">
+        #{mertopid,jdbcType=INTEGER},
+      </if>
+      <if test="mertype != null">
+        #{mertype,jdbcType=VARCHAR},
+      </if>
+      <if test="mername != null">
+        #{mername,jdbcType=VARCHAR},
+      </if>
+      <if test="mercumpresent != null">
+        #{mercumpresent,jdbcType=REAL},
+      </if>
+      <if test="merdicpresent != null">
+        #{merdicpresent,jdbcType=REAL},
+      </if>
+      <if test="merappstat != null">
+        #{merappstat,jdbcType=BIT},
+      </if>
+      <if test="merrecommend != null">
+        #{merrecommend,jdbcType=BIT},
+      </if>
+      <if test="isindex != null">
+        #{isindex,jdbcType=BIT},
+      </if>
+      <if test="owecredit != null">
+        #{owecredit,jdbcType=REAL},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.scau.hyskjf.pojo.Merchant">
+    update Merchant
+    <set>
+      <if test="mersubid != null">
+        merSubID = #{mersubid,jdbcType=INTEGER},
+      </if>
+      <if test="mertopid != null">
+        merTopID = #{mertopid,jdbcType=INTEGER},
+      </if>
+      <if test="mertype != null">
+        merType = #{mertype,jdbcType=VARCHAR},
+      </if>
+      <if test="mername != null">
+        merName = #{mername,jdbcType=VARCHAR},
+      </if>
+      <if test="mercumpresent != null">
+        merCumPresent = #{mercumpresent,jdbcType=REAL},
+      </if>
+      <if test="merdicpresent != null">
+        merDicPresent = #{merdicpresent,jdbcType=REAL},
+      </if>
+      <if test="merappstat != null">
+        merAppStat = #{merappstat,jdbcType=BIT},
+      </if>
+      <if test="merrecommend != null">
+        merRecommend = #{merrecommend,jdbcType=BIT},
+      </if>
+      <if test="isindex != null">
+        isIndex = #{isindex,jdbcType=BIT},
+      </if>
+      <if test="owecredit != null">
+        oweCredit = #{owecredit,jdbcType=REAL},
+      </if>
+    </set>
+    where merID = #{merid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.scau.hyskjf.pojo.Merchant">
+    update Merchant
+    set merSubID = #{mersubid,jdbcType=INTEGER},
+      merTopID = #{mertopid,jdbcType=INTEGER},
+      merType = #{mertype,jdbcType=VARCHAR},
+      merName = #{mername,jdbcType=VARCHAR},
+      merCumPresent = #{mercumpresent,jdbcType=REAL},
+      merDicPresent = #{merdicpresent,jdbcType=REAL},
+      merAppStat = #{merappstat,jdbcType=BIT},
+      merRecommend = #{merrecommend,jdbcType=BIT},
+      isIndex = #{isindex,jdbcType=BIT},
+      oweCredit = #{owecredit,jdbcType=REAL}
+    where merID = #{merid,jdbcType=INTEGER}
+  </update>
+
+  <select id="getMerID" resultType="java.lang.Integer">
+    select max(merID)+1 as mmerID
+    from Merchant
+  </select>
+
+  <update id="updateAddCredit" >
+    update Merchant
+    set oweCredit=oweCredit+#{addCredit}
+    where merID=#{merID}
+  </update>
+
+  <resultMap id="memshow" type="com.scau.hyskjf.pojo.MemberMShow">
+    <id column="memID" property="memid" />
+    <result column="memPhone" property="memphone" />
+    <result column="memName" property="memname" />
+  </resultMap>
+  <select id="queryMember" resultMap="memshow">
+    select c.memID,c.memPhone,c.memName
+    from Merchant a left join MemberCard b on a.merID=b.merID
+    left join Member c on b.memID=c.memID
+    left join MemberManager d on d.memID=c.memID
+    where a.merID=#{merID} and d.mmanagerID is null
+  </select>
+
+
+</mapper>

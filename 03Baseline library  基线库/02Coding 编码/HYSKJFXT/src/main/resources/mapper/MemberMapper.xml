@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.scau.hyskjf.dao.MemberMapper">
+  <resultMap id="BaseResultMap" type="com.scau.hyskjf.pojo.Member">
+    <id column="memID" jdbcType="INTEGER" property="memid" />
+    <result column="memCredit" jdbcType="REAL" property="memcredit" />
+    <result column="memCer" jdbcType="VARCHAR" property="memcer" />
+    <result column="memCerID" jdbcType="VARCHAR" property="memcerid" />
+    <result column="memName" jdbcType="VARCHAR" property="memname" />
+    <result column="memSex" jdbcType="VARCHAR" property="memsex" />
+    <result column="memBirth" jdbcType="DATE" property="membirth" />
+    <result column="memPhone" jdbcType="VARCHAR" property="memphone" />
+    <result column="memEmail" jdbcType="VARCHAR" property="mememail" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.scau.hyskjf.pojo.Member">
+    <result column="memAdress" jdbcType="LONGVARCHAR" property="memadress" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    memID, memCredit, memCer, memCerID, memName, memSex, memBirth, memPhone, memEmail
+  </sql>
+  <sql id="Blob_Column_List">
+    memAdress
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from Member
+    where memID = #{memid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from Member
+    where memID = #{memid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.scau.hyskjf.pojo.Member">
+    insert into Member (memID, memCredit, memCer, 
+      memCerID, memName, memSex, 
+      memBirth, memPhone, memEmail, 
+      memAdress)
+    values (#{memid,jdbcType=INTEGER}, #{memcredit,jdbcType=REAL}, #{memcer,jdbcType=VARCHAR}, 
+      #{memcerid,jdbcType=VARCHAR}, #{memname,jdbcType=VARCHAR}, #{memsex,jdbcType=VARCHAR}, 
+      #{membirth,jdbcType=DATE}, #{memphone,jdbcType=VARCHAR}, #{mememail,jdbcType=VARCHAR}, 
+      #{memadress,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.scau.hyskjf.pojo.Member">
+    insert into Member
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="memid != null">
+        memID,
+      </if>
+      <if test="memcredit != null">
+        memCredit,
+      </if>
+      <if test="memcer != null">
+        memCer,
+      </if>
+      <if test="memcerid != null">
+        memCerID,
+      </if>
+      <if test="memname != null">
+        memName,
+      </if>
+      <if test="memsex != null">
+        memSex,
+      </if>
+      <if test="membirth != null">
+        memBirth,
+      </if>
+      <if test="memphone != null">
+        memPhone,
+      </if>
+      <if test="mememail != null">
+        memEmail,
+      </if>
+      <if test="memadress != null">
+        memAdress,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="memid != null">
+        #{memid,jdbcType=INTEGER},
+      </if>
+      <if test="memcredit != null">
+        #{memcredit,jdbcType=REAL},
+      </if>
+      <if test="memcer != null">
+        #{memcer,jdbcType=VARCHAR},
+      </if>
+      <if test="memcerid != null">
+        #{memcerid,jdbcType=VARCHAR},
+      </if>
+      <if test="memname != null">
+        #{memname,jdbcType=VARCHAR},
+      </if>
+      <if test="memsex != null">
+        #{memsex,jdbcType=VARCHAR},
+      </if>
+      <if test="membirth != null">
+        #{membirth,jdbcType=DATE},
+      </if>
+      <if test="memphone != null">
+        #{memphone,jdbcType=VARCHAR},
+      </if>
+      <if test="mememail != null">
+        #{mememail,jdbcType=VARCHAR},
+      </if>
+      <if test="memadress != null">
+        #{memadress,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.scau.hyskjf.pojo.Member">
+    update Member
+    <set>
+      <if test="memcredit != null">
+        memCredit = #{memcredit,jdbcType=REAL},
+      </if>
+      <if test="memcer != null">
+        memCer = #{memcer,jdbcType=VARCHAR},
+      </if>
+      <if test="memcerid != null">
+        memCerID = #{memcerid,jdbcType=VARCHAR},
+      </if>
+      <if test="memname != null">
+        memName = #{memname,jdbcType=VARCHAR},
+      </if>
+      <if test="memsex != null">
+        memSex = #{memsex,jdbcType=VARCHAR},
+      </if>
+      <if test="membirth != null">
+        memBirth = #{membirth,jdbcType=DATE},
+      </if>
+      <if test="memphone != null">
+        memPhone = #{memphone,jdbcType=VARCHAR},
+      </if>
+      <if test="mememail != null">
+        memEmail = #{mememail,jdbcType=VARCHAR},
+      </if>
+      <if test="memadress != null">
+        memAdress = #{memadress,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where memID = #{memid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.scau.hyskjf.pojo.Member">
+    update Member
+    set memCredit = #{memcredit,jdbcType=REAL},
+      memCer = #{memcer,jdbcType=VARCHAR},
+      memCerID = #{memcerid,jdbcType=VARCHAR},
+      memName = #{memname,jdbcType=VARCHAR},
+      memSex = #{memsex,jdbcType=VARCHAR},
+      memBirth = #{membirth,jdbcType=DATE},
+      memPhone = #{memphone,jdbcType=VARCHAR},
+      memEmail = #{mememail,jdbcType=VARCHAR},
+      memAdress = #{memadress,jdbcType=LONGVARCHAR}
+    where memID = #{memid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.scau.hyskjf.pojo.Member">
+    update Member
+    set memCredit = #{memcredit,jdbcType=REAL},
+      memCer = #{memcer,jdbcType=VARCHAR},
+      memCerID = #{memcerid,jdbcType=VARCHAR},
+      memName = #{memname,jdbcType=VARCHAR},
+      memSex = #{memsex,jdbcType=VARCHAR},
+      memBirth = #{membirth,jdbcType=DATE},
+      memPhone = #{memphone,jdbcType=VARCHAR},
+      memEmail = #{mememail,jdbcType=VARCHAR}
+    where memID = #{memid,jdbcType=INTEGER}
+  </update>
+  <select id="getMemID" resultType="java.lang.Integer">
+    select max(memID) as mmemID
+    from Member
+  </select>
+
+  <select id="queryMemIDByMemphone" resultType="java.lang.Integer">
+    select memID
+    from Member
+    where memPhone=#{memphone}
+  </select>
+</mapper>
